@@ -17,10 +17,13 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.LastBaseline
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.layout.FirstBaseline
+
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,25 +43,22 @@ class MainActivity : ComponentActivity() {
 fun MainScreen(modifier: Modifier = Modifier) {
     Row {
         Text(
-            text = "Large Text",
-            Modifier.alignByBaseline(),
+            text = "Large Text\n\nMore Text",
+            Modifier.alignBy(LastBaseline),
             fontSize = 40.sp,
             fontWeight = FontWeight.Bold
         )
         Text(
             text = "Small Text",
-            Modifier.alignByBaseline(),
+            modifier = Modifier.paddingFrom(
+                alignmentLine = FirstBaseline, before = 80.dp, after = 0.dp),
             fontSize = 32.sp,
-            fontWeight = FontWeight.Bold,
+            fontWeight = FontWeight.Bold
         )
+
     }
-
-
-
-
-
-
 }
+
 
 @Composable
 fun TextCell(text: String, modifier: Modifier = Modifier) {
